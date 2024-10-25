@@ -656,17 +656,6 @@ impl<'a, R: Runtime, M: Manager<R>> WindowBuilder<'a, R, M> {
     self
   }
 
-  /// Set the window and webview background color.
-  ///
-  /// ## Platform-specific:
-  ///
-  /// - **Windows**: alpha channel is ignored.
-  #[must_use]
-  pub fn background_color(mut self, color: Color) -> Self {
-    self.window_builder = self.window_builder.background_color(color);
-    self
-  }
-
   /// Sets a parent to the window to be created.
   ///
   /// ## Platform-specific
@@ -846,6 +835,18 @@ impl<'a, R: Runtime, M: Manager<R>> WindowBuilder<'a, R, M> {
   }
 }
 
+impl<'a, R: Runtime, M: Manager<R>> WindowBuilder<'a, R, M> {
+  /// Set the window and webview background color.
+  ///
+  /// ## Platform-specific:
+  ///
+  /// - **Windows**: alpha channel is ignored.
+  #[must_use]
+  pub fn background_color(mut self, color: Color) -> Self {
+    self.window_builder = self.window_builder.background_color(color);
+    self
+  }
+}
 /// A wrapper struct to hold the window menu state
 /// and whether it is global per-app or specific to this window.
 #[cfg(desktop)]

@@ -1323,15 +1323,12 @@ fn default_alpha() -> u8 {
   255
 }
 
-#[cfg(feature = "schema")]
-static HEX_COLOR_RE: once_cell::sync::Lazy<regex::Regex> = once_cell::sync::Lazy::new(|| {
-  regex::Regex::new(r"^#?([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$").unwrap()
-});
-
 #[derive(Deserialize)]
 #[cfg_attr(feature = "schema", derive(JsonSchema))]
 #[serde(untagged)]
 enum InnerColor {
+  /// Color hex string, for example: #fff, #ffffff, or #ffffffff.
+  String(String),
   /// Array of RGB colors. Each value has minimum of 0 and maximum of 255.
   Rgb((u8, u8, u8)),
   /// Array of RGBA colors. Each value has minimum of 0 and maximum of 255.
@@ -1344,9 +1341,6 @@ enum InnerColor {
     #[serde(default = "default_alpha")]
     alpha: u8,
   },
-  /// Color hex string, for example: #fff, #ffffff, or #ffffffff.
-  #[cfg_attr(feature = "schema", validate(regex(path = *HEX_COLOR_RE)))]
-  String(String),
 }
 
 impl<'de> Deserialize<'de> for Color {
@@ -1356,6 +1350,7 @@ impl<'de> Deserialize<'de> for Color {
   {
     let color = InnerColor::deserialize(deserializer)?;
     let color = match color {
+      InnerColor::String(string) => string.parse().map_err(serde::de::Error::custom)?,
       InnerColor::Rgb(rgb) => Color(rgb.0, rgb.1, rgb.2, 255),
       InnerColor::Rgba(rgb) => rgb.into(),
       InnerColor::RgbaObject {
@@ -1364,7 +1359,6 @@ impl<'de> Deserialize<'de> for Color {
         blue,
         alpha,
       } => Color(red, green, blue, alpha),
-      InnerColor::String(string) => string.parse().map_err(serde::de::Error::custom)?,
     };
 
     Ok(color)
@@ -1377,8 +1371,18 @@ impl schemars::JsonSchema for Color {
     "Color".to_string()
   }
 
-  fn json_schema(gen: &mut schemars::gen::SchemaGenerator) -> schemars::schema::Schema {
-    gen.subschema_for::<InnerColor>()
+  fn json_schema(_gen: &mut schemars::gen::SchemaGenerator) -> schemars::schema::Schema {
+    let mut schema = schemars::schema_for!(InnerColor).schema;
+    schema.metadata = None; // Remove `title: InnerColor` from schema
+
+    // add hex color pattern validation
+    let any_of = schema.subschemas().any_of.as_mut().unwrap();
+    let schemars::schema::Schema::Object(str_schema) = any_of.first_mut().unwrap() else {
+      unreachable!()
+    };
+    str_schema.string().pattern = Some("#?([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$".into());
+
+    schema.into()
   }
 }
 

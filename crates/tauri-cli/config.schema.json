@@ -842,7 +842,7 @@
         {
           "description": "Color hex string, for example: #fff, #ffffff, or #ffffffff.",
           "type": "string",
-          "pattern": "#?([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$"
+          "pattern": "^#?([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$"
         },
         {
           "description": "Array of RGB colors. Each value has minimum of 0 and maximum of 255.",

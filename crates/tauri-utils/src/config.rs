@@ -1380,7 +1380,7 @@ impl schemars::JsonSchema for Color {
     let schemars::schema::Schema::Object(str_schema) = any_of.first_mut().unwrap() else {
       unreachable!()
     };
-    str_schema.string().pattern = Some("#?([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$".into());
+    str_schema.string().pattern = Some("^#?([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$".into());
 
     schema.into()
   }

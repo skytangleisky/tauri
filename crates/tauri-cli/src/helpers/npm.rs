@@ -93,7 +93,7 @@ impl PackageManager {
     command.arg("add");
 
     match self {
-      PackageManager::Deno => command.args(dependencies.into_iter().map(|d| format!("npm:{d}"))),
+      PackageManager::Deno => command.args(dependencies.iter().map(|d| format!("npm:{d}"))),
       _ => command.args(dependencies),
     };
 

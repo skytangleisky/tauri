@@ -186,13 +186,14 @@ pub fn wrapper(attributes: TokenStream, item: TokenStream) -> TokenStream {
             // only implemented by `Result`. That way we don't exclude renamed result types
             // which we wouldn't otherwise be able to detect purely from the token stream.
             // The "error message" displayed to the user is simply the trait name.
-            let diagnostic = if at_least_rustc(1, 78) {
+            let diagnostic = if is_rustc_at_least(1, 78) {
               quote!(#[diagnostic::on_unimplemented(message = "async commands that contain references as inputs must return a `Result`")])
             } else {
               quote!()
             };
 
             async_command_check = quote_spanned! {return_type.span() =>
+              #[allow(unreachable_code, clippy::diverging_sub_expression)]
               const _: () = if false {
                 #diagnostic
                 trait AsyncCommandMustReturnResult {}
@@ -459,7 +460,7 @@ fn parse_arg(
   )))
 }
 
-fn at_least_rustc(major: u32, minor: u32) -> bool {
+fn is_rustc_at_least(major: u32, minor: u32) -> bool {
   let version = rustc_version();
   version.0 >= major && version.1 >= minor
 }

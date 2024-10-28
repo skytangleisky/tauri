@@ -480,7 +480,7 @@ fn rustc_version() -> (u32, u32) {
         .flat_map(|p| p.parse::<u32>().ok())
         .collect::<Vec<_>>();
       version
-        .get(0)
+        .first()
         .and_then(|major| version.get(1).map(|minor| (*major, *minor)))
     })
     .unwrap_or((1, 0))

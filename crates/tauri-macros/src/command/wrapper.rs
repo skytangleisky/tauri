@@ -186,6 +186,8 @@ pub fn wrapper(attributes: TokenStream, item: TokenStream) -> TokenStream {
             // only implemented by `Result`. That way we don't exclude renamed result types
             // which we wouldn't otherwise be able to detect purely from the token stream.
             // The "error message" displayed to the user is simply the trait name.
+            //
+            // TODO: remove this check once our MSRV is high enough
             let diagnostic = if is_rustc_at_least(1, 78) {
               quote!(#[diagnostic::on_unimplemented(message = "async commands that contain references as inputs must return a `Result`")])
             } else {

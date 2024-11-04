@@ -75,7 +75,6 @@ macro_rules! gen_wrappers {
         app_handle: $crate::AppHandle<R>,
       }
 
-
       /// # Safety
       ///
       /// We make sure it always runs on the main thread.

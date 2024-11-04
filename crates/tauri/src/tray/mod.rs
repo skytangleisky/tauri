@@ -346,6 +346,9 @@ impl<R: Runtime> TrayIconBuilder<R> {
     struct SafeSend<T>(T);
     unsafe impl<T> Send for SafeSend<T> {}
 
+    // SAFETY:
+    // the menu within this builder was created on main thread
+    // and will be accessed on the main thread
     let inner = &mut Some(self.inner) as *mut _ as isize;
 
     let (tx, rx) = std::sync::mpsc::channel();
@@ -353,6 +356,8 @@ impl<R: Runtime> TrayIconBuilder<R> {
       .app_handle()
       .run_on_main_thread(move || {
         let inner = unsafe { &mut *(inner as *mut Option<tray_icon::TrayIconBuilder>) };
+
+        // SAFETY: will only be accessed on main thread
         let _ = tx.send(inner.take().unwrap().build().map(SafeSend));
       })
       .and_then(|_| rx.recv().map_err(|_| crate::Error::FailedToReceiveMessage))??;

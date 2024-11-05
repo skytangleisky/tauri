@@ -1,5 +1,31 @@
 # Changelog
 
+## \[2.1.0]
+
+### New Features
+
+- [`8036c78e0`](https://www.github.com/tauri-apps/tauri/commit/8036c78e08715b1bc6b9fcb0c59a570eec98014f) ([#11455](https://www.github.com/tauri-apps/tauri/pull/11455) by [@amrbashir](https://www.github.com/tauri-apps/tauri/../../amrbashir)) Add `PathResolver::home_dir()` method on Android.
+- [`f0da0bde8`](https://www.github.com/tauri-apps/tauri/commit/f0da0bde87a80fdca20c588cefcad86e03b9627c) ([#11439](https://www.github.com/tauri-apps/tauri/pull/11439) by [@lucasfernog](https://www.github.com/tauri-apps/tauri/../../lucasfernog)) Added `WebviewWindow::resolve_command_scope` to check a command scope at runtime.
+- [`129414faa`](https://www.github.com/tauri-apps/tauri/commit/129414faa4e027c9035d56614682cacc0335a6a0) ([#11569](https://www.github.com/tauri-apps/tauri/pull/11569) by [@amrbashir](https://www.github.com/tauri-apps/tauri/../../amrbashir)) Add `WebviewBuilder::focused` method to choose whether to focus webview or not on creation.
+
+### Enhancements
+
+- [`c33bbf457`](https://www.github.com/tauri-apps/tauri/commit/c33bbf45740274b6918ea6c647f366fb6008e459) ([#11575](https://www.github.com/tauri-apps/tauri/pull/11575) by [@kornelski](https://www.github.com/tauri-apps/tauri/../../kornelski)) Include the path in ACL I/O errors.
+
+### Bug Fixes
+
+- [`8c6d1e8e6`](https://www.github.com/tauri-apps/tauri/commit/8c6d1e8e6c852667bb223b5f4823948868c26d98) ([#11401](https://www.github.com/tauri-apps/tauri/pull/11401) by [@amrbashir](https://www.github.com/tauri-apps/tauri/../../amrbashir)) Fix `App/AppHandle/Window/Webview/WebviewWindow::cursor_position` getter method failing on Linux with `GDK may only be used from the main thread`.
+- [`f8994b214`](https://www.github.com/tauri-apps/tauri/commit/f8994b214e89acc99ab5ce8dcca8485f43a62dbb) ([#11581](https://www.github.com/tauri-apps/tauri/pull/11581) by [@Mikkel-T](https://www.github.com/tauri-apps/tauri/../../Mikkel-T)) Fix listeners created with `EventTarget::AnyLabel` never receiving events.
+- [`129414faa`](https://www.github.com/tauri-apps/tauri/commit/129414faa4e027c9035d56614682cacc0335a6a0) ([#11569](https://www.github.com/tauri-apps/tauri/pull/11569) by [@amrbashir](https://www.github.com/tauri-apps/tauri/../../amrbashir)) Fix webview not focused by default.
+
+### Dependencies
+
+- Upgraded to `tauri-runtime-wry@2.1.3`
+- Upgraded to `tauri-utils@2.1.0`
+- Upgraded to `tauri-runtime@2.1.2`
+- Upgraded to `tauri-macros@2.0.3`
+- Upgraded to `tauri-build@2.0.3`
+
 ## \[2.0.6]
 
 ### Dependencies

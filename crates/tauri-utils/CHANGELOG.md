@@ -1,5 +1,15 @@
 # Changelog
 
+## \[2.1.0]
+
+### New Features
+
+- [`058c0db72`](https://www.github.com/tauri-apps/tauri/commit/058c0db72f43fbe1574d0db654560e693755cd7e) ([#11584](https://www.github.com/tauri-apps/tauri/pull/11584) by [@amrbashir](https://www.github.com/tauri-apps/tauri/../../amrbashir)) Add `bundle > linux > rpm > compression` config option to control RPM bundle compression type and level.
+
+### Enhancements
+
+- [`c33bbf457`](https://www.github.com/tauri-apps/tauri/commit/c33bbf45740274b6918ea6c647f366fb6008e459) ([#11575](https://www.github.com/tauri-apps/tauri/pull/11575) by [@kornelski](https://www.github.com/tauri-apps/tauri/../../kornelski)) Include the path in ACL I/O errors.
+
 ## \[2.0.2]
 
 ### New Features

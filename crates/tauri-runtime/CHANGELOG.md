@@ -1,5 +1,15 @@
 # Changelog
 
+## \[2.1.2]
+
+### Bug Fixes
+
+- [`129414faa`](https://www.github.com/tauri-apps/tauri/commit/129414faa4e027c9035d56614682cacc0335a6a0) ([#11569](https://www.github.com/tauri-apps/tauri/pull/11569) by [@amrbashir](https://www.github.com/tauri-apps/tauri/../../amrbashir)) Fix webview not focused by default.
+
+### Dependencies
+
+- Upgraded to `tauri-utils@2.1.0`
+
 ## \[2.1.1]
 
 ### Dependencies

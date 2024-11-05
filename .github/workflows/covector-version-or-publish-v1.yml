@@ -120,7 +120,6 @@ jobs:
           cargo update -p os_str_bytes --precise 6.5.1
           cargo update -p thread_local --precise 1.1.7
           cargo update -p cc --precise 1.0.94
-          cargo update -p home --precise 0.5.5
           cargo update -p tree_magic_mini --precise 3.0.3
           cargo update -p tokio-test --precise 0.4.3
           cargo update -p tokio-stream --precise 0.1.14
